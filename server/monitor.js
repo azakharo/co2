@@ -2,6 +2,8 @@
 
 var request = require("request");
 var _ = require("lodash");
+var Measur = require('./api/measur/measur.model');
+
 
 exports.monitor = function() {
 
@@ -9,7 +11,16 @@ exports.monitor = function() {
     if (err) {
       return;
     }
-    console.log(data);
+    //console.log(data);
+
+    // Create new measurement
+    var newMeasur = {
+      timestamp: new Date(),
+      co2: data.co2,
+      t: data.temp
+    };
+    Measur.create(newMeasur);
+
   });
 };
 
