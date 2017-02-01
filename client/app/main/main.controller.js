@@ -55,16 +55,10 @@ angular.module('projectsApp')
           yAxis: [
             { // co2 yAxis
               labels: {
-                format: '{value}',
-                style: {
-                  color: 'red'
-                }
+                format: '{value}'
               },
               title: {
-                text: 'CO2, ppm',
-                style: {
-                  color: 'red'
-                }
+                text: 'CO2, ppm'
               },
               allowDecimals: false
             },
