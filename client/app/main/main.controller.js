@@ -10,32 +10,59 @@ Highcharts.setOptions({
 });
 
 angular.module('projectsApp')
-  .controller('MainCtrl', function ($scope, $http, $timeout, socket) {
-    $scope.measurs = [];
-    $scope.chartTimeVals = [];
-    $scope.chartTempVals = [];
-    $scope.chartCo2Vals = [];
+  .controller('MainCtrl', function ($scope, $http, $timeout, $interval, socket) {
+    /////////////////////////////////////////////
+    // Startup
 
-    $http.get('/api/measurs').success(function(measurs) {
-      $scope.measurs = measurs;
-      if (measurs.length > 0) {
-        $scope.latestMeasur = measurs[measurs.length - 1];
+    init();
+    $timeout(updateChartSize, 500);
+
+    // Monitor new day
+    let prevMonDt = null;
+    let newDayMon = $interval(function () {
+      let curDt = moment();
+
+      if (prevMonDt && curDt.date() !== prevMonDt.date()) { // if new day
+        socket.unsyncUpdates('measur');
+        init();
       }
 
-      // Prepare chart data
-      $scope.chartTimeVals = _.map(measurs, function(m){
-        return moment(m.timestamp).format('HH:mm');
-      });
-      $scope.chartCo2Vals = _.map(measurs, 'co2');
-      $scope.chartTempVals = _.map(measurs, 't');
-      drawChart();
-
-      socket.syncUpdates('measur', $scope.measurs, onNewMeasur);
-    });
+      prevMonDt = curDt;
+    }, 7000);
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('measur');
+      $interval.cancel(newDayMon);
     });
+
+    // Startup
+    /////////////////////////////////////////////
+
+
+    function init() {
+      $scope.measurs = [];
+      $scope.chartTimeVals = [];
+      $scope.chartTempVals = [];
+      $scope.chartCo2Vals = [];
+
+      $http.get('/api/measurs').success(function(measurs) {
+        $scope.measurs = measurs;
+        if (measurs.length > 0) {
+          $scope.latestMeasur = measurs[measurs.length - 1];
+        }
+
+        // Prepare chart data
+        $scope.chartTimeVals = _.map(measurs, function(m){
+          return moment(m.timestamp).format('HH:mm');
+        });
+        $scope.chartCo2Vals = _.map(measurs, 'co2');
+        $scope.chartTempVals = _.map(measurs, 't');
+        drawChart();
+
+        socket.syncUpdates('measur', $scope.measurs, onNewMeasur);
+      });
+    }
+
 
     function onNewMeasur(socketEvent, measur) {
       if (socketEvent == 'created') {
@@ -141,7 +168,6 @@ angular.module('projectsApp')
     window.onresize = debounce(function () {
       $timeout(updateChartSize, 0);
     }, 500);
-    $timeout(updateChartSize, 500);
 
     // Chart
     ///////////////////////////////////////////////////////////////////////////

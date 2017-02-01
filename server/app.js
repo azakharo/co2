@@ -36,6 +36,7 @@ require('./routes')(app);
 
 monitor.monitor();
 // Start monitoring
+setInterval(monitor.monitorNewDay, 1000);
 setInterval(monitor.monitor, 10000);
 
 // Start server

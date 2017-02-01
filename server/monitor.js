@@ -1,8 +1,9 @@
 'use strict';
 
-var request = require("request");
-var _ = require("lodash");
-var Measur = require('./api/measur/measur.model');
+const request = require("request");
+const _ = require("lodash");
+const Measur = require('./api/measur/measur.model');
+const moment = require("moment");
 
 
 exports.monitor = function() {
@@ -22,6 +23,26 @@ exports.monitor = function() {
     Measur.create(newMeasur);
 
   });
+};
+
+let prevMonDt = null;
+
+exports.monitorNewDay = function () {
+
+  let curDt = moment();
+
+  if (prevMonDt && curDt.date() !== prevMonDt.date()) { // if new day
+    console.log("new day - clear the db");
+    Measur.remove({}, function(err) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('success');
+      }
+    });
+  }
+
+  prevMonDt = curDt;
 };
 
 function getMeasurement(url2req, callback) {

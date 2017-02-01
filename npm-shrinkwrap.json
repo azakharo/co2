@@ -4982,6 +4982,11 @@
         }
       }
     },
+    "moment": {
+      "version": "2.17.1",
+      "from": "moment@latest",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.17.1.tgz"
+    },
     "mongodb": {
       "version": "2.0.55",
       "from": "mongodb@>=1.2.0 <2.1.0",
