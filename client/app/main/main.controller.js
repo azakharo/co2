@@ -71,15 +71,9 @@ angular.module('projectsApp')
             { // Temp yAxis
               title: {
                 text: 'Температура, град.Цельсия'
-                //style: {
-                //  color: Highcharts.getOptions().colors[1]
-                //}
               },
               labels: {
                 format: '{value}'
-                //style: {
-                //  color: Highcharts.getOptions().colors[1]
-                //}
               },
               allowDecimals: true,
               opposite: true,
