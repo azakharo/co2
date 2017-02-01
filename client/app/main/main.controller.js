@@ -31,6 +31,9 @@ angular.module('projectsApp')
     function onNewMeasur(socketEvent, measur) {
       if (socketEvent == 'created') {
         $scope.latestMeasur = measur;
+        $scope.chartTimeVals.push(moment(measur.timestamp).format('HH:mm'));
+        $scope.chartCo2Vals.push(measur.co2);
+        $scope.chartTempVals.push(measur.t);
       }
     }
 
@@ -89,12 +92,19 @@ angular.module('projectsApp')
         series: [{
           name: 'CO2',
           data: $scope.chartCo2Vals,
-          yAxis: 0
+          yAxis: 0,
+          tooltip: {
+            valueSuffix: ' ppm'
+          }
         }, {
           name: 'temp',
           data: $scope.chartTempVals,
-          yAxis: 1
-        }],
+          yAxis: 1,
+          tooltip: {
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y:.1f} C</b><br/>',
+            valueSuffix: ' С'
+          }
+          }],
         size: {
           width: getChartW(),
           height: getChartH()
