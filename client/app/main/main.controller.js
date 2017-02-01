@@ -1,5 +1,14 @@
 'use strict';
 
+// Disable chart animation
+Highcharts.setOptions({
+  plotOptions: {
+    series: {
+      animation: false
+    }
+  }
+});
+
 angular.module('projectsApp')
   .controller('MainCtrl', function ($scope, $http, $timeout, socket) {
     $scope.measurs = [];
