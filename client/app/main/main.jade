@@ -1,9 +1,18 @@
 .main-container.vh100.vw100
- .number-section.p2
-   .panel.panel-default.number-panel
-     .panel-body
-       .Grid.Grid--center.event-panel-row.event-panel-row-mb1
-         .Grid-cell.text-large CO2
-         .Grid-cell.bold.text-xxlarge ha-ha
- .chart-section
-   p Chart
+  .number-section.p2
+    .panel.panel-default.number-panel
+      .panel-body
+        .Grid.Grid--center
+          .Grid-cell.text-xxlarge.text-right
+            | CO
+            sub 2
+          .Grid-cell.bold.text-xxlarge.text-right.plr2 {{ latestMeasur.co2 }}
+          .Grid-cell.bold.text-large ppm
+        .Grid.Grid--center
+          .Grid-cell.text-xxlarge.text-right T
+          .Grid-cell.bold.text-xxlarge.text-right.plr2 {{ latestMeasur.t | number:1 }}
+          .Grid-cell.bold.text-large
+            sup o
+            span C
+  .chart-section
+    p Chart
