@@ -10,7 +10,7 @@
           .Grid-cell.text-xxlarge.text-right
             | CO
             sub 2
-          .Grid-cell.bold.text-xxlarge.text-right.plr2 {{ latestMeasur.co2 }}
+          .Grid-cell.bold.text-xxlarge.text-right.plr2(ng-class="getCo2Class(latestMeasur.co2)") {{ latestMeasur.co2 }}
           .Grid-cell.bold.text-large ppm
         .Grid.Grid--center
           .Grid-cell.text-xxlarge.text-right T
@@ -25,9 +25,9 @@
           .Grid-cell.text-xlarge.text-right.plr2 avg
           .Grid-cell.text-xlarge.text-right.pr2 max
         .Grid.Grid--center
-          .Grid-cell.text-xxlarge.text-right {{ co2Min }}
-          .Grid-cell.text-xxlarge.text-right.plr2 {{ co2Avg | number:0 }}
-          .Grid-cell.text-xxlarge.text-right.pr2 {{ co2Max }}
+          .Grid-cell.text-xxlarge.text-right(ng-class="getCo2Class(co2Min)") {{ co2Min }}
+          .Grid-cell.text-xxlarge.text-right.plr2(ng-class="getCo2Class(co2Avg)") {{ co2Avg | number:0 }}
+          .Grid-cell.text-xxlarge.text-right.pr2(ng-class="getCo2Class(co2Max)") {{ co2Max }}
         .Grid.Grid--center
           .Grid-cell.text-xxlarge.text-right {{ tMin | number:1 }}
           .Grid-cell.text-xxlarge.text-right.plr2 {{ tAvg | number:1 }}

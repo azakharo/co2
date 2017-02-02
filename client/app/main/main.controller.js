@@ -193,4 +193,22 @@ angular.module('projectsApp')
     // Calc min, avg, max
     //*****************************************************
 
+    //===============================================================
+    // Limits
+
+    $scope.getCo2Class = function (co2) {
+      if (co2 <= 600) {
+        return "val-normal";
+      }
+      else if (co2 > 600 && co2 < 1000) {
+        return "val-warn";
+      }
+      else {
+        return "val-danger";
+      }
+    };
+
+    // Limits
+    //===============================================================
+
   });
