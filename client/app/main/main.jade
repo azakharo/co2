@@ -3,6 +3,10 @@
     .panel.panel-default.number-panel
       .panel-body
         .Grid.Grid--center
+          .Grid-cell
+          .Grid-cell.text-xlarge.text-right.plr2 current
+          .Grid-cell
+        .Grid.Grid--center
           .Grid-cell.text-xxlarge.text-right
             | CO
             sub 2
@@ -14,5 +18,19 @@
           .Grid-cell.bold.text-large
             sup o
             span C
+    .panel.panel-default.minmax-panel.ml3
+      .panel-body
+        .Grid.Grid--center
+          .Grid-cell.text-xlarge.text-right min
+          .Grid-cell.text-xlarge.text-right.plr2 avg
+          .Grid-cell.text-xlarge.text-right.pr2 max
+        .Grid.Grid--center
+          .Grid-cell.text-xxlarge.text-right {{ co2Min }}
+          .Grid-cell.text-xxlarge.text-right.plr2 {{ co2Avg | number:0 }}
+          .Grid-cell.text-xxlarge.text-right.pr2 {{ co2Max }}
+        .Grid.Grid--center
+          .Grid-cell.text-xxlarge.text-right {{ tMin | number:1 }}
+          .Grid-cell.text-xxlarge.text-right.plr2 {{ tAvg | number:1 }}
+          .Grid-cell.text-xxlarge.text-right.pr2 {{ tMax | number:1 }}
   .chart-section
     highchart(config="chartConfig")

@@ -49,6 +49,7 @@ angular.module('projectsApp')
         $scope.measurs = measurs;
         if (measurs.length > 0) {
           $scope.latestMeasur = measurs[measurs.length - 1];
+          updateMinMax();
         }
 
         // Prepare chart data
@@ -70,6 +71,7 @@ angular.module('projectsApp')
         $scope.chartTimeVals.push(moment(measur.timestamp).format('HH:mm'));
         $scope.chartCo2Vals.push(measur.co2);
         $scope.chartTempVals.push(measur.t);
+        updateMinMax();
       }
     }
 
@@ -171,5 +173,24 @@ angular.module('projectsApp')
 
     // Chart
     ///////////////////////////////////////////////////////////////////////////
+
+
+    //*****************************************************
+    // Calc min, avg, max
+
+    function updateMinMax() {
+      const measurs = $scope.measurs;
+
+      $scope.tMin = _.minBy(measurs, 't').t;
+      $scope.tAvg = _.meanBy(measurs, 't');
+      $scope.tMax = _.maxBy(measurs, 't').t;
+
+      $scope.co2Min = _.minBy(measurs, 'co2').co2;
+      $scope.co2Avg = _.meanBy(measurs, 'co2');
+      $scope.co2Max = _.maxBy(measurs, 'co2').co2;
+    }
+
+    // Calc min, avg, max
+    //*****************************************************
 
   });
