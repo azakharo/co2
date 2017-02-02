@@ -14,7 +14,7 @@
           .Grid-cell.bold.text-large ppm
         .Grid.Grid--center
           .Grid-cell.text-xxlarge.text-right T
-          .Grid-cell.bold.text-xxlarge.text-right.plr2 {{ latestMeasur.t | number:1 }}
+          .Grid-cell.bold.text-xxlarge.text-right.plr2(ng-class="getTempClass(latestMeasur.t)") {{ latestMeasur.t | number:1 }}
           .Grid-cell.bold.text-large
             sup o
             span C
@@ -29,8 +29,8 @@
           .Grid-cell.text-xxlarge.text-right.plr2(ng-class="getCo2Class(co2Avg)") {{ co2Avg | number:0 }}
           .Grid-cell.text-xxlarge.text-right.pr2(ng-class="getCo2Class(co2Max)") {{ co2Max }}
         .Grid.Grid--center
-          .Grid-cell.text-xxlarge.text-right {{ tMin | number:1 }}
-          .Grid-cell.text-xxlarge.text-right.plr2 {{ tAvg | number:1 }}
-          .Grid-cell.text-xxlarge.text-right.pr2 {{ tMax | number:1 }}
+          .Grid-cell.text-xxlarge.text-right(ng-class="getTempClass(tMin)") {{ tMin | number:1 }}
+          .Grid-cell.text-xxlarge.text-right.plr2(ng-class="getTempClass(tAvg)") {{ tAvg | number:1 }}
+          .Grid-cell.text-xxlarge.text-right.pr2(ng-class="getTempClass(tMax)") {{ tMax | number:1 }}
   .chart-section
     highchart(config="chartConfig")

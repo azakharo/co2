@@ -208,6 +208,33 @@ angular.module('projectsApp')
       }
     };
 
+    $scope.getTempClass = function (t) {
+      const curMonth = moment().month();
+
+      if (curMonth >= 4 && curMonth <= 8) { // if summer
+        if (t >= 23 && t <= 25) {
+          return "val-normal";
+        }
+        else if (t >= 21 && t <= 28) {
+          return "val-warn";
+        }
+        else {
+          return "val-danger";
+        }
+      }
+      else { // if winter
+        if (t >= 22 && t <= 24) {
+          return "val-normal";
+        }
+        else if (t >= 20 && t <= 25) {
+          return "val-warn";
+        }
+        else {
+          return "val-danger";
+        }
+      }
+    };
+
     // Limits
     //===============================================================
 
