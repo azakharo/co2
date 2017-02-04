@@ -15,7 +15,6 @@ angular.module('projectsApp')
     // Startup
 
     init();
-    $timeout(updateChartSize, 500);
 
     // Monitor new day
     let prevMonDt = null;
@@ -59,6 +58,7 @@ angular.module('projectsApp')
         $scope.chartCo2Vals = _.map(measurs, 'co2');
         $scope.chartTempVals = _.map(measurs, 't');
         drawChart();
+        $timeout(updateChartSize, 500);
 
         socket.syncUpdates('measur', $scope.measurs, onNewMeasur);
       });
