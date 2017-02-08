@@ -11,11 +11,13 @@
           .Grid-cell.text-xxlarge.text-right
             | CO
             sub 2
-          .Grid-cell.bold.text-xxlarge.text-right.plr2(ng-class="getCo2Class(latestMeasur.co2)") {{ latestMeasur.co2 }}
+          .Grid-cell.bold.text-xxlarge.text-right.plr2(ng-class="getCo2Class(latestMeasur.co2)",
+          uib-tooltip="{{ latestMeasur.timestamp | date:'HH:mm' }}") {{ latestMeasur.co2 }}
           .Grid-cell.bold.text-large ppm
         .Grid.Grid--center
           .Grid-cell.text-xxlarge.text-right T
-          .Grid-cell.bold.text-xxlarge.text-right.plr2(ng-class="getTempClass(latestMeasur.t)") {{ latestMeasur.t | number:1 }}
+          .Grid-cell.bold.text-xxlarge.text-right.plr2(ng-class="getTempClass(latestMeasur.t)",
+          uib-tooltip="{{ latestMeasur.timestamp | date:'HH:mm' }}") {{ latestMeasur.t | number:1 }}
           .Grid-cell.bold.text-large
             sup o
             span C
