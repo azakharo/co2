@@ -1,6 +1,6 @@
 .main-container.vh100.vw100
   .number-section.p2
-    .panel.panel-default.number-panel
+    .panel.panel-default.number-panel(ng-show="latestMeasur")
       .panel-body
         .Grid.Grid--center
           .Grid-cell
@@ -18,7 +18,7 @@
           .Grid-cell.bold.text-large
             sup o
             span C
-    .panel.panel-default.minmax-panel.ml3
+    .panel.panel-default.minmax-panel.ml3(ng-show="measurs && measurs.length > 0")
       .panel-body
         .Grid.Grid--center
           .Grid-cell.text-xlarge.text-right min
@@ -33,4 +33,4 @@
           .Grid-cell.text-xxlarge.text-right.plr2(ng-class="getTempClass(tAvg)") {{ tAvg | number:1 }}
           .Grid-cell.text-xxlarge.text-right.pr2(ng-class="getTempClass(tMax)") {{ tMax | number:1 }}
   .chart-section
-    highchart(config="chartConfig")
+    highchart(config="chartConfig", ng-show="measurs && measurs.length > 0")
