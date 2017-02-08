@@ -38,13 +38,17 @@ angular.module('projectsApp')
     /////////////////////////////////////////////
 
 
+    let dummyMeasurs = [];
     function init() {
+      dummyMeasurs = [];
       $scope.measurs = [];
       $scope.chartTimeVals = [];
       $scope.chartTempVals = [];
       $scope.chartCo2Vals = [];
 
       $http.get('/api/measurs').success(function(measurs) {
+        measurs = sort(measurs);
+        dummyMeasurs = measurs;
         $scope.measurs = measurs;
         if (measurs.length > 0) {
           $scope.latestMeasur = measurs[measurs.length - 1];
@@ -60,13 +64,15 @@ angular.module('projectsApp')
         drawChart();
         $timeout(updateChartSize, 500);
 
-        socket.syncUpdates('measur', $scope.measurs, onNewMeasur);
+        socket.syncUpdates('measur', dummyMeasurs, onNewMeasur);
       });
     }
 
 
     function onNewMeasur(socketEvent, measur) {
       if (socketEvent == 'created') {
+        $scope.measurs.push(measur);
+        $scope.measurs = sort($scope.measurs);
         $scope.latestMeasur = measur;
         $scope.chartTimeVals.push(moment(measur.timestamp).format('HH:mm'));
         $scope.chartCo2Vals.push(measur.co2);
@@ -75,6 +81,12 @@ angular.module('projectsApp')
       }
     }
 
+    function sort(measurs) {
+      // Sort by timestamp ascending
+      return _.sortBy(measurs, function (m) {
+        return m.timestamp.getTime();
+      });
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Chart
