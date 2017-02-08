@@ -9,7 +9,8 @@ angular.module('projectsApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'highcharts-ng'
+  'highcharts-ng',
+  'angularSpinner'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

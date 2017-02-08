@@ -40,6 +40,7 @@ angular.module('projectsApp')
 
     let dummyMeasurs = [];
     function init() {
+      $scope.isGettingData = true;
       dummyMeasurs = [];
       $scope.measurs = [];
       $scope.chartTimeVals = [];
@@ -47,6 +48,7 @@ angular.module('projectsApp')
       $scope.chartCo2Vals = [];
 
       $http.get('/api/measurs').success(function(measurs) {
+        $scope.isGettingData = false;
         measurs = sort(measurs);
         dummyMeasurs = measurs;
         $scope.measurs = measurs;
