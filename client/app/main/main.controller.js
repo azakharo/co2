@@ -195,13 +195,13 @@ angular.module('projectsApp')
     function updateMinMax() {
       const measurs = $scope.measurs;
 
-      $scope.tMin = _.minBy(measurs, 't').t;
+      $scope.tMin = _.minBy(measurs, 't');
       $scope.tAvg = _.meanBy(measurs, 't');
-      $scope.tMax = _.maxBy(measurs, 't').t;
+      $scope.tMax = _.maxBy(measurs, 't');
 
-      $scope.co2Min = _.minBy(measurs, 'co2').co2;
+      $scope.co2Min = _.minBy(measurs, 'co2');
       $scope.co2Avg = _.meanBy(measurs, 'co2');
-      $scope.co2Max = _.maxBy(measurs, 'co2').co2;
+      $scope.co2Max = _.maxBy(measurs, 'co2');
     }
 
     // Calc min, avg, max

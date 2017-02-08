@@ -26,12 +26,16 @@
           .Grid-cell.text-xlarge.text-right.plr2 avg
           .Grid-cell.text-xlarge.text-right.pr2 max
         .Grid.Grid--center
-          .Grid-cell.text-xxlarge.text-right(ng-class="getCo2Class(co2Min)") {{ co2Min }}
+          .Grid-cell.text-xxlarge.text-right(ng-class="getCo2Class(co2Min.co2)",
+          uib-tooltip="{{ co2Min.timestamp | date:'HH:mm' }}") {{ co2Min.co2 }}
           .Grid-cell.text-xxlarge.text-right.plr2(ng-class="getCo2Class(co2Avg)") {{ co2Avg | number:0 }}
-          .Grid-cell.text-xxlarge.text-right.pr2(ng-class="getCo2Class(co2Max)") {{ co2Max }}
+          .Grid-cell.text-xxlarge.text-right.pr2(ng-class="getCo2Class(co2Max.co2)",
+          uib-tooltip="{{ co2Max.timestamp | date:'HH:mm' }}") {{ co2Max.co2 }}
         .Grid.Grid--center
-          .Grid-cell.text-xxlarge.text-right(ng-class="getTempClass(tMin)") {{ tMin | number:1 }}
+          .Grid-cell.text-xxlarge.text-right(ng-class="getTempClass(tMin.t)",
+          uib-tooltip="{{ tMin.timestamp | date:'HH:mm' }}") {{ tMin.t | number:1 }}
           .Grid-cell.text-xxlarge.text-right.plr2(ng-class="getTempClass(tAvg)") {{ tAvg | number:1 }}
-          .Grid-cell.text-xxlarge.text-right.pr2(ng-class="getTempClass(tMax)") {{ tMax | number:1 }}
+          .Grid-cell.text-xxlarge.text-right.pr2(ng-class="getTempClass(tMax.t)",
+          uib-tooltip="{{ tMax.timestamp | date:'HH:mm' }}") {{ tMax.t | number:1 }}
   .chart-section
     highchart(config="chartConfig", ng-show="measurs && measurs.length > 0")

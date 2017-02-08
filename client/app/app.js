@@ -62,6 +62,13 @@ angular.module('projectsApp', [
     };
   })
 
+  .config(function ($uibTooltipProvider) {
+    $uibTooltipProvider.options({
+      placement: 'auto bottom',
+      appendToBody: true
+    });
+  })
+
   .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
